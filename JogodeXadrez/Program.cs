@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using JogodeXadrez.Tabuleiro;
+using JogodeXadrez.tabuleiro;
 
 namespace JogodeXadrez
 {
@@ -11,12 +11,9 @@ namespace JogodeXadrez
     {
         static void Main(string[] args)
         {
-            Posicao P;
+            Tabuleiro tab = new Tabuleiro(8,8);
 
-            P = new Posicao(3, 4);
-            Console.WriteLine("Posicao: " + P.linha + P.coluna);
-
-            Console.WriteLine(); 
+            Console.ReadLine();
 
         }
     }
