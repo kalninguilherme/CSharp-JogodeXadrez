@@ -7,7 +7,7 @@ using JogodeXadrez.tabuleiro;
 
 namespace JogodeXadrez
 {
-    internal class Tela
+    class Tela
     {
         public static void imprimirTabuleiro(Tabuleiro tab)
         {
