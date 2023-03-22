@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using JogodeXadrez;
 using JogodeXadrez.tabuleiro;
 using JogodeXadrez.xadrez;
 
@@ -21,6 +24,14 @@ namespace JogodeXadrez
                 tab.colocarPeca(new Rei(Cor.Preta, tab), new Posicao(2, 4));
 
                 Tela.imprimirTabuleiro(tab);
+
+                Console.WriteLine();
+                PosicaoXadrez pos = new PosicaoXadrez('d', 8);
+                Console.WriteLine(pos);
+
+                Console.WriteLine(pos.ToPosicao().ToString());
+
+
 
                 Console.ReadLine();
             }

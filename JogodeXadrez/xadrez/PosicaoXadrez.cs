@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JogodeXadrez.tabuleiro;
 
-namespace JogodeXadrez.tabuleiro
+namespace JogodeXadrez.xadrez
 {
-    class Posicao
+    internal class PosicaoXadrez
     {
+        public char coluna { get; set; }
         public int linha { get; set; }
-        public int coluna { get; set; }
 
-        public Posicao(int linha, int coluna)
+        public PosicaoXadrez(char coluna, int linha)
         {
-            this.linha = linha;
             this.coluna = coluna;
+            this.linha = linha;
+        }
+        public Posicao ToPosicao()
+        {
+            return new Posicao (8 - linha, coluna - 'a');
         }
         public override string ToString()
         {
