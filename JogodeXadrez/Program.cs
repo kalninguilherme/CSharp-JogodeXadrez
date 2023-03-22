@@ -23,6 +23,10 @@ namespace JogodeXadrez
                 tab.colocarPeca(new Torre(Cor.Preta, tab), new Posicao(1, 3));
                 tab.colocarPeca(new Rei(Cor.Preta, tab), new Posicao(2, 4));
 
+                tab.colocarPeca(new Torre(Cor.Branca, tab), new Posicao(1, 5));
+                tab.colocarPeca(new Torre(Cor.Branca, tab), new Posicao(3, 7));
+                tab.colocarPeca(new Rei(Cor.Branca, tab), new Posicao(3, 4));
+
                 Tela.imprimirTabuleiro(tab);
 
                 Console.WriteLine();
@@ -39,6 +43,7 @@ namespace JogodeXadrez
             {
                 Console.WriteLine(e.Message);
             }
+
         }
     }
 }
