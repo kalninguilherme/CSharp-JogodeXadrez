@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace JogodeXadrez.tabuleiro
+﻿namespace JogodeXadrez.tabuleiro
 {
     class Posicao
     {
@@ -12,6 +6,11 @@ namespace JogodeXadrez.tabuleiro
         public int coluna { get; set; }
 
         public Posicao(int linha, int coluna)
+        {
+            this.linha = linha;
+            this.coluna = coluna;
+        }
+        public void definirValores(int linha, int coluna)
         {
             this.linha = linha;
             this.coluna = coluna;

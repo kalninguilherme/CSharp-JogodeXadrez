@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace JogodeXadrez.tabuleiro
+﻿namespace JogodeXadrez.tabuleiro
 {
-    class Peca
+    abstract class Peca
     {
         public Posicao posicao { get; set; }
         public Cor cor { get; protected set; }
-        public int qteMovimentos {get; protected set; }
-        public Tabuleiro tab { get; protected set; } 
+        public int qteMovimentos { get; protected set; }
+        public Tabuleiro tab { get; protected set; }
 
         public Peca(Cor cor, Tabuleiro tab)
         {
@@ -20,10 +14,19 @@ namespace JogodeXadrez.tabuleiro
             this.qteMovimentos = 0;
             this.tab = tab;
         }
-
         public void incrementarQteMovimentos()
         {
-
+            qteMovimentos++;
         }
+        public void decrementarQteMovimentos()
+        {
+            qteMovimentos--;
+        }
+        public bool movimentoPossivel(Posicao pos)
+        {
+            return movimentosPossiveis()[pos.linha, pos.coluna];
+        }
+        public abstract bool[,] movimentosPossiveis();
+
     }
 }
