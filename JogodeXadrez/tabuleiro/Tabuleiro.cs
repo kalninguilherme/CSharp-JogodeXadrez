@@ -28,7 +28,7 @@
             return peca(pos) != null;
         }
 
-        public void ColocarPeca(Peca p, Posicao pos)
+        public void colocarPeca(Peca p, Posicao pos)
         {
             if (existePeca(pos))
             {
@@ -38,7 +38,7 @@
             p.posicao = pos;
         }
 
-        public Peca RetirarPeca(Posicao pos)
+        public Peca retirarPeca(Posicao pos)
         {
             if (peca(pos) == null)
             {
