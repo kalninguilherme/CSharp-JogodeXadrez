@@ -61,6 +61,9 @@ namespace JogodeXadrez.xadrez
                 desfazMovimento(origem, destino, pecaCapturada);
                 throw new TabuleiroException("Você não pode se colocar em xeque!");
             }
+
+            Peca p = tab.peca(destino);
+
             if (estaEmXeque(adversaria(jogadorAtual)))
             {
                 xeque = true;
@@ -69,8 +72,16 @@ namespace JogodeXadrez.xadrez
             {
                 xeque = false;
             }
-            turno++;
-            mudaJogador();
+
+            if (testeXequemate(adversaria(jogadorAtual)))
+            {
+                terminada = true;
+            }
+            else
+            {
+                turno++;
+                mudaJogador();
+            }
         }
 
         public void validarPosicaoDeOrigem(Posicao pos)
@@ -85,15 +96,15 @@ namespace JogodeXadrez.xadrez
             }
             if (!tab.peca(pos).existeMovimentosPossiveis())
             {
-                throw new TabuleiroException("Não há movimentos possíveis para a peça escolhida!");
+                throw new TabuleiroException("Não há movimentos possíveis para a peça de origem escolhida!");
             }
         }
 
         public void validarPosicaoDeDestino(Posicao origem, Posicao destino)
         {
-            if (!tab.peca(origem).podeMoverPara(destino))
+            if (!tab.peca(origem).movimentoPossivel(destino))
             {
-                throw new TabuleiroException("Posicao de destino inválida!");
+                throw new TabuleiroException("Posição de destino inválida!");
             }
         }
 
@@ -136,11 +147,14 @@ namespace JogodeXadrez.xadrez
             return aux;
         }
 
-        private Cor adversaria(Cor cor) {
-            if (cor == Cor.Branca) {
+        private Cor adversaria(Cor cor)
+        {
+            if (cor == Cor.Branca)
+            {
                 return Cor.Preta;
             }
-            else {
+            else
+            {
                 return Cor.Branca;
             }
         }
@@ -162,7 +176,7 @@ namespace JogodeXadrez.xadrez
             Peca R = rei(cor);
             if (R == null)
             {
-                throw new TabuleiroException("Não tem rei da cor " + cor + " no tabuleiro!");
+                throw new TabuleiroException("Não há rei da cor " + cor + " no tabuleiro!");
             }
             foreach (Peca x in pecasEmJogo(adversaria(cor)))
             {
@@ -173,6 +187,37 @@ namespace JogodeXadrez.xadrez
                 }
             }
             return false;
+        }
+
+        public bool testeXequemate(Cor cor)
+        {
+            if (!estaEmXeque(cor))
+            {
+                return false;
+            }
+            foreach (Peca x in pecasEmJogo(cor))
+            {
+                bool[,] mat = x.movimentosPossiveis();
+                for (int i = 0; i < tab.linhas; i++)
+                {
+                    for (int j = 0; j < tab.colunas; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Posicao origem = x.posicao;
+                            Posicao destino = new Posicao(i, j);
+                            Peca pecaCapturada = executaMovimento(origem, destino);
+                            bool testeXeque = estaEmXeque(cor);
+                            desfazMovimento(origem, destino, pecaCapturada);
+                            if (!testeXeque)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         public void colocarNovaPeca(char coluna, int linha, Peca peca)

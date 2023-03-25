@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using JogodeXadrez;
-using JogodeXadrez.tabuleiro;
+﻿using JogodeXadrez.tabuleiro;
 using JogodeXadrez.xadrez;
 
 namespace JogodeXadrez
@@ -26,12 +18,9 @@ namespace JogodeXadrez
                         Console.Clear();
                         Tela.imprimirPartida(partida);
 
-                        
-
                         Console.WriteLine();
                         Console.Write("Origem: ");
                         Posicao origem = Tela.lerPosicaoXadrez().ToPosicao();
-                        
                         partida.validarPosicaoDeOrigem(origem);
 
                         bool[,] posicoesPossiveis = partida.tab.peca(origem).movimentosPossiveis();
@@ -42,7 +31,6 @@ namespace JogodeXadrez
                         Console.WriteLine();
                         Console.Write("Destino: ");
                         Posicao destino = Tela.lerPosicaoXadrez().ToPosicao();
-                        
                         partida.validarPosicaoDeDestino(origem, destino);
 
                         partida.realizaJogada(origem, destino);
@@ -52,9 +40,9 @@ namespace JogodeXadrez
                         Console.WriteLine(e.Message);
                         Console.ReadLine();
                     }
-
                 }
-                Tela.imprimirTabuleiro(partida.tab);
+                Console.Clear();
+                Tela.imprimirPartida(partida);
             }
             catch (TabuleiroException e)
             {
