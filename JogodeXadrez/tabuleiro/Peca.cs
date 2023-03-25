@@ -7,7 +7,7 @@
         public int qteMovimentos { get; protected set; }
         public Tabuleiro tab { get; protected set; }
 
-        public Peca(Cor cor, Tabuleiro tab)
+        public Peca(Tabuleiro tab, Cor cor)
         {
             this.posicao = null;
             this.cor = cor;
@@ -37,11 +37,6 @@
                 }
             }
             return false;
-        }
-
-        public bool podeMoverPara(Posicao pos)
-        {
-            return movimentosPossiveis()[pos.linha, pos.coluna];
         }
 
         public bool movimentoPossivel(Posicao pos)
